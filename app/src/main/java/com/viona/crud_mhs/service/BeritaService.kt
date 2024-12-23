@@ -1,6 +1,7 @@
 package com.viona.crud_mhs.service
 
 import com.viona.crud_mhs.model.LoginResponse
+import com.viona.crud_mhs.model.MahasiswaResponse
 import com.viona.crud_mhs.model.RegisterResponse
 import com.viona.crud_mhs.model.ResponseBerita
 import retrofit2.Call
@@ -30,4 +31,7 @@ interface BeritaService {
         @Field("username") username : String,
         @Field("password") password : String
     ) : Call<LoginResponse>
+
+    @GET("listmahasiswa.php")
+    fun getAllMahasiswa() : Call<MahasiswaResponse>
 }

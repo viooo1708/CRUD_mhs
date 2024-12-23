@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var call : Call<ResponseBerita>
     private lateinit var beritaAdapter : BeritaAdapter
     private lateinit var btnTambahData: Button
+    private lateinit var btnShowData : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +36,20 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefreshLayout = findViewById(R.id.refresh_layout)
         recycleview = findViewById(R.id.rv_berita)
-        btnTambahData = findViewById(R.id.btnTambahData)
 
+        btnTambahData = findViewById(R.id.btnTambahData)
+        btnShowData = findViewById(R.id.btnShowData)
+
+        //page tambah data
         btnTambahData.setOnClickListener(){
-            val  toMain = Intent(this@MainActivity, TambahDataUserScreenActivity::class.java)
-            startActivity(toMain)
+            val intent = Intent(this@MainActivity,TambahDataUserScreenActivity::class.java)
+            startActivity(intent)
         }
+        btnShowData.setOnClickListener(){
+            val intent = Intent(this@MainActivity,DetailMhs::class.java)
+            startActivity(intent)
+        }
+
 
 
         beritaAdapter = BeritaAdapter{modelBerita : ModelBerita -> beritaOnClick(modelBerita) }
@@ -55,20 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         getData()
 
-
     }
 
-    private fun beritaOnClick(modelBerita: ModelBerita) {
-        val intent = Intent(this, DetailBeritaAcitvity::class.java).apply {
-            putExtra("gambar", modelBerita.gambar_berita)
-            putExtra("judul", modelBerita.judul)
-            putExtra("isi", modelBerita.isi_berita)
-            putExtra("tanggal", modelBerita.tgl_berita)
-
-        }
-        startActivity(intent)
+    private fun beritaOnClick(modelBerita : ModelBerita) {
+        Toast.makeText(applicationContext, modelBerita.judul,
+            Toast.LENGTH_SHORT
+        ).show()
     }
-
 
     private fun getData() {
         swipeRefreshLayout.isRefreshing = true

@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.viona.crud_mhs.ListMahasiswaActivity
 import com.viona.crud_mhs.R
 import com.viona.crud_mhs.model.RegisterResponse
 import com.viona.crud_mhs.service.ApiClient
@@ -53,7 +54,9 @@ class TambahDataUserScreenActivity : AppCompatActivity() {
                                 Toast.makeText(this@TambahDataUserScreenActivity,response.body()?.message,
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                finish()
+                                //mau pindah ke page lain
+                                val toMain = Intent(this@TambahDataUserScreenActivity, ListMahasiswaActivity::class.java)
+                                startActivity(toMain)
 
                             }else{
                                 val errorMessage = response.errorBody()?.string()?: "Unknown Error"
